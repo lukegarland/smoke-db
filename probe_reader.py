@@ -11,7 +11,7 @@ NOTIFY_UUID="1086fff2-3343-4817-8bb2-b32206336ce8"
 
 
 
-def callback(sender, data: bytearray):
+def temperature_notify_callback(sender, data: bytearray):
     
     print(f"""
 PROBE 1: {int(binascii.hexlify(data[5:7]).decode())/10}
@@ -28,6 +28,8 @@ async def find_device(name="TP25"):
             return device
     print(f"Error. Did not find device with name: {name}")
     return None
+
+
 async def main():
     device = await find_device()
     if device: 
@@ -38,7 +40,7 @@ async def main():
         await client.write_gatt_char(COMMAND_UUID, bytearray([1,9,62,143,138,108,53,238,38,227,248,241]), response=True)
         
         # start temperature notifiactions via callback
-        await client.start_notify(NOTIFY_UUID, callback)
+        await client.start_notify(NOTIFY_UUID, temperature_notify_callback)
 
         while True:
             await asyncio.sleep(1)
