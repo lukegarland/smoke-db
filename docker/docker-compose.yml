@@ -1,0 +1,37 @@
+services:
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.size=500MB'
+    
+    ports:
+      - "9090:9090"
+      
+    volumes:
+      - ./prometheus:/etc/prometheus/
+      - prom_data:/prometheus
+    networks:
+      - docker_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  grafana: 
+    image: grafana/grafana:12.0.3
+    ports: 
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - docker_network
+
+networks:
+  docker_network:
+    driver: bridge
+
+volumes:
+  prom_data: {}
+  grafana_data: {}
