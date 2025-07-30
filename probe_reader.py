@@ -5,10 +5,13 @@ import asyncio
 import binascii
 import datetime
 
+import prometheus
 
+# globals...
 COMMAND_UUID="1086fff1-3343-4817-8bb2-b32206336ce8"
 NOTIFY_UUID="1086fff2-3343-4817-8bb2-b32206336ce8"
 STARTUP_COMMAND = bytearray([1,9,62,143,138,108,53,238,38,227,248,241])
+prometheus_exporter = prometheus.PrometheusExporter()
 
 
 def decode_bcd(bcd_bytearray:bytearray) -> int | None:
@@ -34,8 +37,8 @@ PROBE 2: {probe_dict.get(2)}
 PROBE 3: {probe_dict.get(3)}
 PROBE 4: {probe_dict.get(4)}
 """)
-
-    return probe_dict
+    for probe_num, value in probe_dict.items():
+        prometheus_exporter.report_probe_temp(value, probe_num)
 
 async def find_device(name="TP25", timeout=5):
     devices = await bleak.BleakScanner.discover(timeout=timeout)
