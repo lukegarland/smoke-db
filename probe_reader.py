@@ -8,6 +8,7 @@ import bleak.backends.device
 
 COMMAND_UUID="1086fff1-3343-4817-8bb2-b32206336ce8"
 NOTIFY_UUID="1086fff2-3343-4817-8bb2-b32206336ce8"
+STARTUP_COMMAND = bytearray([1,9,62,143,138,108,53,238,38,227,248,241])
 
 def decode_bcd(bcd_bytearray:bytearray) -> int | None:
     hex_str = binascii.hexlify(bcd_bytearray).decode()
@@ -52,7 +53,7 @@ async def connect_device(device: bleak.backends.device.BLEDevice) -> bleak.Bleak
     
     # connect and send command sequence to start streaming / notfiying temperature data
     await client.connect()
-    await client.write_gatt_char(COMMAND_UUID, bytearray([1,9,62,143,138,108,53,238,38,227,248,241]), response=True)
+    await client.write_gatt_char(COMMAND_UUID, STARTUP_COMMAND, response=True)
     
     # start temperature notifiactions via callback
     await client.start_notify(NOTIFY_UUID, temperature_notify_callback)
