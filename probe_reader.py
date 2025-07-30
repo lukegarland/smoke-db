@@ -1,25 +1,24 @@
 import bleak
+import bleak.backends.device
+
 import asyncio
 import binascii
 import datetime
 
-import bleak.backends
-import bleak.backends.device
 
 COMMAND_UUID="1086fff1-3343-4817-8bb2-b32206336ce8"
 NOTIFY_UUID="1086fff2-3343-4817-8bb2-b32206336ce8"
 STARTUP_COMMAND = bytearray([1,9,62,143,138,108,53,238,38,227,248,241])
 
+
 def decode_bcd(bcd_bytearray:bytearray) -> int | None:
     hex_str = binascii.hexlify(bcd_bytearray).decode()
-
     try: 
         # value "xxxx" is actually xxx.x
         parse_hex_to_int = int(hex_str)
         return parse_hex_to_int/10
     except ValueError:
         return None
-
 
 
 def temperature_notify_callback(sender, data: bytearray):
@@ -30,8 +29,6 @@ def temperature_notify_callback(sender, data: bytearray):
         4: decode_bcd(data[11:13])
     }
     print(datetime.datetime.now().replace(microsecond=0).isoformat(sep=" "))
-    print(f"{binascii.hexlify(data[0:1])}")
-
     print(f"""PROBE 1: {probe_dict.get(1)}
 PROBE 2: {probe_dict.get(2)}
 PROBE 3: {probe_dict.get(3)}
@@ -76,4 +73,6 @@ async def main():
                 else:
                     print("Error, unable to connect to device")
 
-asyncio.run(main())
+
+if __name__ == "__main__":
+    asyncio.run(main())
