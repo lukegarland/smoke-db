@@ -5,7 +5,9 @@ Tested for ThermoPro TP-25 quad-probe meat thermometer.
 
 
 ## Project Structure
-- `python/`: contains code and scripts for connecting to ThermoPro TP-25 and scraping the 
+- `python/`: contains code and scripts for connecting to ThermoPro TP-25 and scraping the temperature sensee by the device probes.
+    - `probe_reader.py` is the main file that connects to the device and runs the main loop. 
+    - `test.py` is a test file used for mocking the temperature probe device for the purposes of testing and developing the grafana dashboard. 
 - `docker/`: contains docker compose file, prometheus configuraiton, and a copy of the latest grafana dashbaord, for running locally the entire project locally.
 
 - `setup.sh`: create and configure python virtual envrionment. This requires `virtualenv` and Python 3.11 installed.  
