@@ -1,0 +1,28 @@
+import time
+import prometheus
+import random
+import pprint
+prometheus_exporter = prometheus.PrometheusExporter()
+NUM_PROBES = 4
+
+def main():
+    temperatures = {
+        1: 25,
+        2: 50,
+        3: 65,
+        4: 75
+    }
+    while True:
+
+        for probe_num, temperature in temperatures.items():
+            
+            new_temp_delta = random.normalvariate(sigma=1)
+            temperature = round(temperature + new_temp_delta,3)
+            prometheus_exporter.report_probe_temp(temperature, probe_num)
+            temperatures[probe_num] = temperature
+        pprint.pprint(temperatures)
+        time.sleep(10)
+    pass
+
+if __name__ == "__main__":
+    main()
