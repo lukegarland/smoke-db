@@ -5,7 +5,7 @@ import asyncio
 import binascii
 import datetime
 
-import smokepro_t25.prometheus as prometheus
+import prometheus
 
 # globals...
 COMMAND_UUID="1086fff1-3343-4817-8bb2-b32206336ce8"
