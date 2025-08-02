@@ -5,7 +5,7 @@ import asyncio
 import binascii
 import datetime
 
-import prometheus
+import smokepro_t25.prometheus as prometheus
 
 # globals...
 COMMAND_UUID="1086fff1-3343-4817-8bb2-b32206336ce8"
@@ -75,7 +75,7 @@ async def main():
                     print("successfully reconnected to device")
                 else:
                     print("Error, unable to connect to device")
-
+                    prometheus_exporter.probe_disconnected()
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -19,4 +19,7 @@ class PrometheusExporter():
         self.probe_temperature_fahrenheit.labels(probe_num=probe_num).set(c_to_f(celsius_reading))
     
 
-
+    def probe_disconnected(self):
+        for probe in self.probe_temperature_celsius._labelvalues:
+            self.probe_temperature_celsius.labels(probe_num=probe).set="NaN"
+            self.probe_temperature_fahrenheit.labels(probe_num=probe).set="NaN"
