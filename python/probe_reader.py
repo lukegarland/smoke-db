@@ -62,13 +62,15 @@ async def connect_device(device: bleak.backends.device.BLEDevice) -> bleak.Bleak
     return client
 
 async def main():
+    predictor = prometheus.TemperatureTimePredictor(prometheus_exporter)
     device = await find_device(timeout=5)
     if device:
         client = await connect_device(device) 
         
         while True:
             try:
-                await asyncio.sleep(1)
+                await asyncio.sleep(5)
+                predictor.run_realtime_prediction()
                 if not client.is_connected:
                     device = await find_device(timeout=15)
                     if device:
