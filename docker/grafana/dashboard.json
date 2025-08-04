@@ -21,7 +21,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "12.0.3"
+      "version": "12.1.0"
     },
     {
       "type": "datasource",
@@ -46,6 +46,12 @@
       "id": "timeseries",
       "name": "Time series",
       "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "volkovlabs-variable-panel",
+      "name": "Business Variable",
+      "version": "4.1.0"
     }
   ],
   "annotations": {
@@ -71,6 +77,19 @@
   "links": [],
   "panels": [
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 15,
+      "panels": [],
+      "title": "Current Status",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -88,7 +107,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -101,10 +121,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 5,
       "options": {
@@ -122,7 +142,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "disableTextWrap": false,
@@ -198,7 +218,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue"
+                "color": "blue",
+                "value": 0
               },
               {
                 "color": "green",
@@ -210,7 +231,7 @@
               },
               {
                 "color": "red",
-                "value": 375
+                "value": 400
               }
             ]
           },
@@ -219,10 +240,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 1
       },
       "id": 4,
       "options": {
@@ -240,7 +261,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "disableTextWrap": false,
@@ -313,7 +334,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent"
+                "color": "transparent",
+                "value": 0
               }
             ]
           }
@@ -326,8 +348,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "Probe 1",
-                  "Probe 4"
+                  "Probe 1"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -339,7 +360,7 @@
                 "value": {
                   "legend": false,
                   "tooltip": false,
-                  "viz": false
+                  "viz": true
                 }
               }
             ]
@@ -347,7 +368,7 @@
         ]
       },
       "gridPos": {
-        "h": 11,
+        "h": 10,
         "w": 12,
         "x": 0,
         "y": 9
@@ -366,7 +387,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -473,7 +494,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent"
+                "color": "transparent",
+                "value": 0
               }
             ]
           }
@@ -481,7 +503,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 11,
+        "h": 10,
         "w": 12,
         "x": 12,
         "y": 9
@@ -500,7 +522,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -564,6 +586,429 @@
         "h": 1,
         "w": 24,
         "x": 0,
+        "y": 19
+      },
+      "id": 19,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Meat Probes only",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "thresholdsStyle": {
+                  "mode": "color",
+                  "thresholds": []
+                }
+              },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 0,
+            "y": 20
+          },
+          "id": 12,
+          "options": {
+            "alertCustomMessage": "",
+            "alwaysVisibleFilter": false,
+            "autoScroll": false,
+            "browserTabNamePattern": "",
+            "collapsedByDefault": false,
+            "customValue": false,
+            "displayMode": "button",
+            "emptyValue": false,
+            "favorites": {
+              "enabled": false,
+              "storage": "browser"
+            },
+            "filter": false,
+            "groupSelection": false,
+            "header": true,
+            "isMinimizeForTable": false,
+            "isMinimizeViewShowCustomIcon": false,
+            "isPinTabsEnabled": false,
+            "isUseLocalTime": false,
+            "minimizeOutputFormat": "text",
+            "minimizeViewCustomIcon": "",
+            "minimizeViewNativeIcon": "gf-movepane-right",
+            "padding": 10,
+            "persistent": false,
+            "requestLatency": "low",
+            "saveSelectedGroup": false,
+            "saveSelectedGroupKey": "",
+            "selectedValues": {
+              "showSelected": false
+            },
+            "showGroupTotal": false,
+            "showLabel": false,
+            "showName": false,
+            "showResetButton": false,
+            "showTotal": false,
+            "statusSort": false,
+            "sticky": false,
+            "tabsInOrder": true,
+            "variable": "predict_probe",
+            "wordBreak": "normal"
+          },
+          "pluginVersion": "4.1.0",
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "Probe Selection",
+          "type": "volkovlabs-variable-panel"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "thresholdsStyle": {
+                  "mode": "color",
+                  "thresholds": []
+                }
+              },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 4,
+            "y": 20
+          },
+          "id": 18,
+          "options": {
+            "alertCustomMessage": "",
+            "alwaysVisibleFilter": false,
+            "autoScroll": false,
+            "browserTabNamePattern": "",
+            "collapsedByDefault": false,
+            "customValue": false,
+            "displayMode": "button",
+            "emptyValue": true,
+            "favorites": {
+              "enabled": false,
+              "storage": "browser"
+            },
+            "filter": false,
+            "groupSelection": false,
+            "header": true,
+            "isMinimizeForTable": false,
+            "isMinimizeViewShowCustomIcon": false,
+            "isPinTabsEnabled": false,
+            "isUseLocalTime": false,
+            "minimizeOutputFormat": "text",
+            "minimizeViewCustomIcon": "",
+            "minimizeViewNativeIcon": "gf-movepane-right",
+            "padding": 10,
+            "persistent": false,
+            "requestLatency": "low",
+            "saveSelectedGroup": false,
+            "saveSelectedGroupKey": "",
+            "selectedValues": {
+              "showSelected": false
+            },
+            "showGroupTotal": false,
+            "showLabel": false,
+            "showName": false,
+            "showResetButton": false,
+            "showTotal": false,
+            "statusSort": false,
+            "sticky": false,
+            "tabsInOrder": true,
+            "variable": "predict_temp",
+            "wordBreak": "normal"
+          },
+          "pluginVersion": "4.1.0",
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "Temperature Selection",
+          "type": "volkovlabs-variable-panel"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "dateTimeFromNow"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 20
+          },
+          "id": 17,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "probe_prediction_time_to_temp_timestamp{target_temp=~\"$predict_temp\", probe_num=~\"$predict_probe\"}*1000",
+              "legendFormat": "Probe {{probe_num}} @ {{target_temp}} F",
+              "range": true,
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "New panel",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "thresholdsStyle": {
+                  "mode": "color",
+                  "thresholds": []
+                }
+              },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 4,
+            "y": 28
+          },
+          "id": 13,
+          "options": {
+            "alertCustomMessage": "",
+            "alwaysVisibleFilter": false,
+            "autoScroll": false,
+            "browserTabNamePattern": "",
+            "collapsedByDefault": false,
+            "customValue": false,
+            "displayMode": "button",
+            "emptyValue": false,
+            "favorites": {
+              "enabled": false,
+              "storage": "browser"
+            },
+            "filter": false,
+            "groupSelection": false,
+            "header": true,
+            "isMinimizeForTable": false,
+            "isMinimizeViewShowCustomIcon": false,
+            "isPinTabsEnabled": false,
+            "isUseLocalTime": false,
+            "minimizeOutputFormat": "text",
+            "minimizeViewCustomIcon": "",
+            "minimizeViewNativeIcon": "gf-movepane-right",
+            "padding": 10,
+            "persistent": false,
+            "requestLatency": "low",
+            "saveSelectedGroup": false,
+            "saveSelectedGroupKey": "",
+            "selectedValues": {
+              "showSelected": false
+            },
+            "showGroupTotal": false,
+            "showLabel": false,
+            "showName": false,
+            "showResetButton": false,
+            "showTotal": false,
+            "statusSort": false,
+            "sticky": false,
+            "tabsInOrder": true,
+            "variable": "predict_time",
+            "wordBreak": "normal"
+          },
+          "pluginVersion": "4.1.0",
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "Time Selection",
+          "type": "volkovlabs-variable-panel"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "text",
+                    "value": 0
+                  }
+                ]
+              },
+              "unit": "fahrenheit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 12,
+            "y": 28
+          },
+          "id": 14,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.1.0",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "predict_linear(probe_temperature_fahrenheit{probe_num=~\"$predict_probe\"}[5m], $predict_time)",
+              "legendFormat": "Probe {{probe_num}}",
+              "range": true,
+              "refId": "A",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "Predicted Temperature in ${predict_time}",
+          "type": "stat"
+        }
+      ],
+      "title": "Temperature Predictions",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
         "y": 20
       },
       "id": 7,
@@ -583,7 +1028,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": 0
                   },
                   {
                     "color": "#EAB839",
@@ -598,7 +1044,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 19
+            "y": 34
           },
           "id": 6,
           "options": {
@@ -618,7 +1064,7 @@
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.0.3",
+          "pluginVersion": "12.1.0",
           "targets": [
             {
               "editorMode": "code",
@@ -658,7 +1104,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": 0
                   },
                   {
                     "color": "#EAB839",
@@ -673,7 +1120,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 19
+            "y": 34
           },
           "id": 8,
           "options": {
@@ -688,7 +1135,7 @@
             },
             "showHeader": true
           },
-          "pluginVersion": "12.0.3",
+          "pluginVersion": "12.1.0",
           "targets": [
             {
               "editorMode": "code",
@@ -765,6 +1212,7 @@
       "type": "row"
     }
   ],
+  "refresh": "5s",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
@@ -788,19 +1236,19 @@
       },
       {
         "current": {
-          "text": "325",
-          "value": "325"
+          "text": "225",
+          "value": "225"
         },
         "label": "Target Air Temp",
         "name": "air_target",
         "options": [
           {
             "selected": true,
-            "text": "325",
-            "value": "325"
+            "text": "225",
+            "value": "225"
           }
         ],
-        "query": "325",
+        "query": "225",
         "type": "textbox"
       },
       {
@@ -822,31 +1270,128 @@
       },
       {
         "current": {
-          "text": "135",
-          "value": "135"
+          "text": "165",
+          "value": "165"
         },
         "label": "Target Meat Temp",
         "name": "meat_target",
         "options": [
           {
             "selected": true,
-            "text": "135",
-            "value": "135"
+            "text": "165",
+            "value": "165"
           }
         ],
-        "query": "135",
+        "query": "165",
         "type": "textbox"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {},
+        "definition": "label_values(probe_temperature_celsius,probe_num)",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "predict_probe",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(probe_temperature_celsius,probe_num)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "120",
+          "value": "120"
+        },
+        "name": "predict_time",
+        "options": [
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "60"
+          },
+          {
+            "selected": true,
+            "text": "2m",
+            "value": "120"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "300"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "600"
+          },
+          {
+            "selected": false,
+            "text": "15m",
+            "value": "900"
+          },
+          {
+            "selected": false,
+            "text": "20m",
+            "value": "1200"
+          },
+          {
+            "selected": false,
+            "text": "25m",
+            "value": "1500"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "1800"
+          },
+          {
+            "selected": false,
+            "text": "45m",
+            "value": "2700"
+          },
+          {
+            "selected": false,
+            "text": "60m",
+            "value": "3600"
+          }
+        ],
+        "query": "1m : 60,2m : 120,5m : 300,10m : 600,15m : 900,20m : 1200,25m : 1500,30m : 1800,45m : 2700,60m : 3600",
+        "type": "custom"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {},
+        "definition": "label_values(probe_prediction_time_to_temp_timestamp,target_temp)",
+        "hide": 2,
+        "multi": true,
+        "name": "predict_temp",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(probe_prediction_time_to_temp_timestamp,target_temp)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Weber Smokey Mountain Temperature Dashboard",
   "uid": "a7ee26a0-53d9-4a73-92c1-023cfab3224d",
-  "version": 40,
+  "version": 56,
   "weekStart": ""
 }
