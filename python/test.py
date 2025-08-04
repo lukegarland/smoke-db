@@ -16,7 +16,7 @@ def main():
 
         for probe_num, temperature in temperatures.items():
             
-            new_temp_delta = random.normalvariate(sigma=1)
+            new_temp_delta = random.normalvariate(mu=2, sigma=1)
             temperature = round(temperature + new_temp_delta,3)
             prometheus_exporter.report_probe_temp(temperature, probe_num)
             temperatures[probe_num] = temperature
