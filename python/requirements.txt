@@ -1,2 +1,4 @@
 bleak
 prometheus_client
+prometheus_api_client
+numpy
