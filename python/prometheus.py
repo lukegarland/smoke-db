@@ -102,6 +102,7 @@ class TemperatureTimePredictor():
 
 
 if __name__ == "__main__":
+    from pprint import pprint
     exporter = PrometheusExporter()
     predictor = TemperatureTimePredictor(exporter)
 
@@ -109,7 +110,7 @@ if __name__ == "__main__":
     start_date = end_date - datetime.timedelta(minutes=5)
     formatted_data = predictor.get_temperature_data(start_date, end_date)
     
-    predictor.predict_time_to_temperature(formatted_data.get('1'))
-    predictor.predict_time_to_temperature(formatted_data.get('2'))
-    predictor.predict_time_to_temperature(formatted_data.get('3'))
-    predictor.predict_time_to_temperature(formatted_data.get('4'))
+    pprint(predictor.predict_time_to_temperature(formatted_data.get('1')))
+    pprint(predictor.predict_time_to_temperature(formatted_data.get('2')))
+    pprint(predictor.predict_time_to_temperature(formatted_data.get('3')))
+    pprint(predictor.predict_time_to_temperature(formatted_data.get('4')))
