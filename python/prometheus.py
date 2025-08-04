@@ -7,10 +7,10 @@ def c_to_f(celsius_reading:float, round_to=2) -> float:
 
 class PrometheusExporter():
 
-    def __init__(self):
+    def __init__(self, port=8000):
         self.probe_temperature_celsius = prometheus_client.Gauge("probe_temperature_celsius", "The temperature read by the probe in Celsius", labelnames=['probe_num'])
         self.probe_temperature_fahrenheit = prometheus_client.Gauge("probe_temperature_fahrenheit", "The temperature read by the probe in Fahrenheit", labelnames=['probe_num'])
-        prometheus_client.start_http_server(8000)
+        prometheus_client.start_http_server(port)
 
     def report_probe_temp(self, celsius_reading, probe_num):
         if celsius_reading is None:
