@@ -1,7 +1,6 @@
 import prometheus_client
 import prometheus_api_client
 
-from pprint import pprint
 import datetime
 import numpy as np
 import time
@@ -94,6 +93,11 @@ class TemperatureTimePredictor():
             predictions = self.run_prediction(datetime.datetime.now(), prediction_lookback_duration, target_temp)
             
             for probe_num, prediction_timestamp in predictions.items():
+                
+                # set timestamp to zero if time has already passed. 
+                if prediction_timestamp < time.time():
+                    prediction_timestamp = 0
+
                 self.exporter.report_predictions(probe_num, target_temp, prediction_timestamp)
 
 
