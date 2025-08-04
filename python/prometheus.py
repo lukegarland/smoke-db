@@ -47,7 +47,7 @@ class TemperatureTimePredictor():
     
         # normal meat teamperature ranges are 100 to 205 F
         # normal smoking temperature ranges are 180 to 400 F
-        temperature_predictions = [i for i in range(100, 205+1, 5)] + [i for i in range(225, 400+1, 25)]
+        self.temperature_predictions = [i for i in range(100, 205+1, 5)] + [i for i in range(225, 400+1, 25)]
 
     def get_temperature_data(self, start, end):
         
@@ -77,7 +77,7 @@ class TemperatureTimePredictor():
         return predicted_timestamp
     
 
-    def run_prediction(self, prediction_time:datetime.datetime, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=5)):
+    def run_prediction(self, prediction_time:datetime.datetime, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=5), target_temp=165):
         window_end = prediction_time
         window_start = window_end - prediction_lookback_duration
         temperature_data = self.get_temperature_data(window_start, window_end)
@@ -85,15 +85,16 @@ class TemperatureTimePredictor():
         results = {}
 
         for probe, temperature_array in temperature_data.items():
-            predicted_timestamp = self.predict_time_to_temperature(temperature_array)
+            predicted_timestamp = self.predict_time_to_temperature(temperature_array, target_temp)
             results[probe] = predicted_timestamp
         return results
     
     def run_realtime_prediction(self, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=5)):
-        
-        predictions = self.run_prediction(datetime.datetime.now(), prediction_lookback_duration)
-        for probe_num, prediction_timestamp in predictions.items():
-            self.exporter.report_predictions(probe_num, target_temp=165, timestamp_to_temp=prediction_timestamp)
+        for target_temp in self.temperature_predictions:
+            predictions = self.run_prediction(datetime.datetime.now(), prediction_lookback_duration, target_temp)
+            
+            for probe_num, prediction_timestamp in predictions.items():
+                self.exporter.report_predictions(probe_num, target_temp, prediction_timestamp)
 
 
 if __name__ == "__main__":

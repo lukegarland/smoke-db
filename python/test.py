@@ -6,6 +6,8 @@ prometheus_exporter = prometheus.PrometheusExporter()
 NUM_PROBES = 4
 
 def main():
+    predictor = prometheus.TemperatureTimePredictor(prometheus_exporter)
+
     temperatures = {
         1: 25,
         2: 50,
@@ -20,6 +22,8 @@ def main():
             temperature = round(temperature + new_temp_delta,3)
             prometheus_exporter.report_probe_temp(temperature, probe_num)
             temperatures[probe_num] = temperature
+            predictor.run_realtime_prediction()
+            
         pprint.pprint(temperatures)
         time.sleep(10)
     pass
