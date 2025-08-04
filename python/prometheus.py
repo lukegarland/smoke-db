@@ -14,6 +14,11 @@ class PrometheusExporter():
     def __init__(self, port=8000):
         self.probe_temperature_celsius = prometheus_client.Gauge("probe_temperature_celsius", "The temperature read by the probe in Celsius", labelnames=['probe_num'])
         self.probe_temperature_fahrenheit = prometheus_client.Gauge("probe_temperature_fahrenheit", "The temperature read by the probe in Fahrenheit", labelnames=['probe_num'])
+        
+        self.probe_prediction_time_to_temp_timestamp = prometheus_client.Gauge("probe_prediction_time_to_temp_timestamp", 
+                                                                    "The predicted timestamp when the probe reaches target_temp, based on linear regression", 
+                                                                    labelnames=['probe_num', 'target_temp'])
+        
         prometheus_client.start_http_server(port)
 
     def report_probe_temp(self, celsius_reading, probe_num):
@@ -27,6 +32,9 @@ class PrometheusExporter():
         for probe in self.probe_temperature_celsius._labelvalues:
             self.probe_temperature_celsius.labels(probe_num=probe).set="NaN"
             self.probe_temperature_fahrenheit.labels(probe_num=probe).set="NaN"
+
+    def report_predictions(self, probe_num, target_temp, timestamp_to_temp):
+        self.probe_prediction_time_to_temp_timestamp.labels(probe_num=probe_num, target_temp=target_temp).set(timestamp_to_temp)
 
 
 class TemperatureTimePredictor():
@@ -85,8 +93,7 @@ class TemperatureTimePredictor():
         
         predictions = self.run_prediction(datetime.datetime.now(), prediction_lookback_duration)
         for probe_num, prediction_timestamp in predictions.items():
-            pass
-            # report predictions to prometheus
+            self.exporter.report_predictions(probe_num, target_temp=165, timestamp_to_temp=prediction_timestamp)
 
 
 if __name__ == "__main__":
