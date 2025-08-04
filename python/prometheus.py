@@ -76,7 +76,7 @@ class TemperatureTimePredictor():
         return predicted_timestamp
     
 
-    def run_prediction(self, prediction_time:datetime.datetime, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=5), target_temp=165):
+    def run_prediction(self, prediction_time:datetime.datetime, prediction_lookback_duration:datetime.timedelta, target_temp):
         window_end = prediction_time
         window_start = window_end - prediction_lookback_duration
         temperature_data = self.get_temperature_data(window_start, window_end)
@@ -88,7 +88,7 @@ class TemperatureTimePredictor():
             results[probe] = predicted_timestamp
         return results
     
-    def run_realtime_prediction(self, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=5)):
+    def run_realtime_prediction(self, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=2)):
         for target_temp in self.temperature_predictions:
             predictions = self.run_prediction(datetime.datetime.now(), prediction_lookback_duration, target_temp)
             
