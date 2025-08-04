@@ -147,12 +147,14 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
+          "exemplar": false,
           "expr": "probe_temperature_fahrenheit{probe_num=~\"$meat_probe\"}",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
+          "instant": true,
           "legendFormat": "Probe {{probe_num}}",
-          "range": true,
+          "range": false,
           "refId": "A",
           "useBackend": false,
           "datasource": {
@@ -166,11 +168,12 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
+          "exemplar": false,
           "expr": "$meat_target",
           "hide": false,
-          "instant": false,
+          "instant": true,
           "legendFormat": "Target",
-          "range": true,
+          "range": false,
           "refId": "B"
         }
       ],
@@ -189,7 +192,7 @@
                 "fieldName": "Target",
                 "handlerArguments": {
                   "threshold": {
-                    "color": "orange"
+                    "color": "dark-red"
                   }
                 },
                 "handlerKey": "threshold1"
@@ -270,9 +273,9 @@
           "expr": "probe_temperature_fahrenheit{probe_num=~\"$air_probe\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "instant": false,
+          "instant": true,
           "legendFormat": "Probe {{probe_num}}",
-          "range": true,
+          "range": false,
           "refId": "A",
           "useBackend": false,
           "datasource": {
@@ -300,8 +303,8 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 210,
-            "axisSoftMin": 50,
+            "axisSoftMax": 215,
+            "axisSoftMin": 0,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -338,34 +341,10 @@
                 "value": 0
               }
             ]
-          }
+          },
+          "unit": "fahrenheit"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Probe 1"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 10,
@@ -461,7 +440,8 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 350,
+            "axisSoftMax": 400,
+            "axisSoftMin": 0,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -498,7 +478,8 @@
                 "value": 0
               }
             ]
-          }
+          },
+          "unit": "fahrenheit"
         },
         "overrides": []
       },
@@ -581,7 +562,7 @@
       "type": "timeseries"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -589,419 +570,472 @@
         "y": 19
       },
       "id": 19,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "Meat Probes only",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "thresholdsStyle": {
-                  "mode": "color",
-                  "thresholds": []
-                }
-              },
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 4,
-            "w": 4,
-            "x": 0,
-            "y": 20
-          },
-          "id": 12,
-          "options": {
-            "alertCustomMessage": "",
-            "alwaysVisibleFilter": false,
-            "autoScroll": false,
-            "browserTabNamePattern": "",
-            "collapsedByDefault": false,
-            "customValue": false,
-            "displayMode": "button",
-            "emptyValue": false,
-            "favorites": {
-              "enabled": false,
-              "storage": "browser"
-            },
-            "filter": false,
-            "groupSelection": false,
-            "header": true,
-            "isMinimizeForTable": false,
-            "isMinimizeViewShowCustomIcon": false,
-            "isPinTabsEnabled": false,
-            "isUseLocalTime": false,
-            "minimizeOutputFormat": "text",
-            "minimizeViewCustomIcon": "",
-            "minimizeViewNativeIcon": "gf-movepane-right",
-            "padding": 10,
-            "persistent": false,
-            "requestLatency": "low",
-            "saveSelectedGroup": false,
-            "saveSelectedGroupKey": "",
-            "selectedValues": {
-              "showSelected": false
-            },
-            "showGroupTotal": false,
-            "showLabel": false,
-            "showName": false,
-            "showResetButton": false,
-            "showTotal": false,
-            "statusSort": false,
-            "sticky": false,
-            "tabsInOrder": true,
-            "variable": "predict_probe",
-            "wordBreak": "normal"
-          },
-          "pluginVersion": "4.1.0",
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              }
-            }
-          ],
-          "title": "Probe Selection",
-          "type": "volkovlabs-variable-panel"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "thresholdsStyle": {
-                  "mode": "color",
-                  "thresholds": []
-                }
-              },
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 4,
-            "y": 20
-          },
-          "id": 18,
-          "options": {
-            "alertCustomMessage": "",
-            "alwaysVisibleFilter": false,
-            "autoScroll": false,
-            "browserTabNamePattern": "",
-            "collapsedByDefault": false,
-            "customValue": false,
-            "displayMode": "button",
-            "emptyValue": true,
-            "favorites": {
-              "enabled": false,
-              "storage": "browser"
-            },
-            "filter": false,
-            "groupSelection": false,
-            "header": true,
-            "isMinimizeForTable": false,
-            "isMinimizeViewShowCustomIcon": false,
-            "isPinTabsEnabled": false,
-            "isUseLocalTime": false,
-            "minimizeOutputFormat": "text",
-            "minimizeViewCustomIcon": "",
-            "minimizeViewNativeIcon": "gf-movepane-right",
-            "padding": 10,
-            "persistent": false,
-            "requestLatency": "low",
-            "saveSelectedGroup": false,
-            "saveSelectedGroupKey": "",
-            "selectedValues": {
-              "showSelected": false
-            },
-            "showGroupTotal": false,
-            "showLabel": false,
-            "showName": false,
-            "showResetButton": false,
-            "showTotal": false,
-            "statusSort": false,
-            "sticky": false,
-            "tabsInOrder": true,
-            "variable": "predict_temp",
-            "wordBreak": "normal"
-          },
-          "pluginVersion": "4.1.0",
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              }
-            }
-          ],
-          "title": "Temperature Selection",
-          "type": "volkovlabs-variable-panel"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "dateTimeFromNow"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 20
-          },
-          "id": 17,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.1.0",
-          "targets": [
-            {
-              "editorMode": "code",
-              "expr": "probe_prediction_time_to_temp_timestamp{target_temp=~\"$predict_temp\", probe_num=~\"$predict_probe\"}*1000",
-              "legendFormat": "Probe {{probe_num}} @ {{target_temp}} F",
-              "range": true,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              }
-            }
-          ],
-          "title": "New panel",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "thresholdsStyle": {
-                  "mode": "color",
-                  "thresholds": []
-                }
-              },
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 8,
-            "x": 4,
-            "y": 28
-          },
-          "id": 13,
-          "options": {
-            "alertCustomMessage": "",
-            "alwaysVisibleFilter": false,
-            "autoScroll": false,
-            "browserTabNamePattern": "",
-            "collapsedByDefault": false,
-            "customValue": false,
-            "displayMode": "button",
-            "emptyValue": false,
-            "favorites": {
-              "enabled": false,
-              "storage": "browser"
-            },
-            "filter": false,
-            "groupSelection": false,
-            "header": true,
-            "isMinimizeForTable": false,
-            "isMinimizeViewShowCustomIcon": false,
-            "isPinTabsEnabled": false,
-            "isUseLocalTime": false,
-            "minimizeOutputFormat": "text",
-            "minimizeViewCustomIcon": "",
-            "minimizeViewNativeIcon": "gf-movepane-right",
-            "padding": 10,
-            "persistent": false,
-            "requestLatency": "low",
-            "saveSelectedGroup": false,
-            "saveSelectedGroupKey": "",
-            "selectedValues": {
-              "showSelected": false
-            },
-            "showGroupTotal": false,
-            "showLabel": false,
-            "showName": false,
-            "showResetButton": false,
-            "showTotal": false,
-            "statusSort": false,
-            "sticky": false,
-            "tabsInOrder": true,
-            "variable": "predict_time",
-            "wordBreak": "normal"
-          },
-          "pluginVersion": "4.1.0",
-          "targets": [
-            {
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              }
-            }
-          ],
-          "title": "Time Selection",
-          "type": "volkovlabs-variable-panel"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "fieldMinMax": false,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "text",
-                    "value": 0
-                  }
-                ]
-              },
-              "unit": "fahrenheit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 12,
-            "x": 12,
-            "y": 28
-          },
-          "id": 14,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.1.0",
-          "targets": [
-            {
-              "editorMode": "code",
-              "expr": "predict_linear(probe_temperature_fahrenheit{probe_num=~\"$predict_probe\"}[5m], $predict_time)",
-              "legendFormat": "Probe {{probe_num}}",
-              "range": true,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              }
-            }
-          ],
-          "title": "Predicted Temperature in ${predict_time}",
-          "type": "stat"
-        }
-      ],
+      "panels": [],
       "title": "Temperature Predictions",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Meat Probes only",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "thresholdsStyle": {
+              "mode": "color",
+              "thresholds": []
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 20
+      },
+      "id": 12,
+      "options": {
+        "alertCustomMessage": "",
+        "alwaysVisibleFilter": false,
+        "autoScroll": false,
+        "browserTabNamePattern": "",
+        "collapsedByDefault": false,
+        "customValue": false,
+        "displayMode": "button",
+        "emptyValue": false,
+        "favorites": {
+          "enabled": false,
+          "storage": "browser"
+        },
+        "filter": false,
+        "groupSelection": false,
+        "header": true,
+        "isMinimizeForTable": false,
+        "isMinimizeViewShowCustomIcon": false,
+        "isPinTabsEnabled": false,
+        "isUseLocalTime": false,
+        "minimizeOutputFormat": "text",
+        "minimizeViewCustomIcon": "",
+        "minimizeViewNativeIcon": "gf-movepane-right",
+        "padding": 10,
+        "persistent": false,
+        "requestLatency": "low",
+        "saveSelectedGroup": false,
+        "saveSelectedGroupKey": "",
+        "selectedValues": {
+          "showSelected": false
+        },
+        "showGroupTotal": false,
+        "showLabel": false,
+        "showName": false,
+        "showResetButton": false,
+        "showTotal": false,
+        "statusSort": false,
+        "sticky": false,
+        "tabsInOrder": true,
+        "variable": "predict_probe",
+        "wordBreak": "normal"
+      },
+      "pluginVersion": "4.1.0",
+      "title": "Probe Selection",
+      "type": "volkovlabs-variable-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "thresholdsStyle": {
+              "mode": "color",
+              "thresholds": []
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 20,
+        "x": 4,
+        "y": 20
+      },
+      "id": 18,
+      "options": {
+        "alertCustomMessage": "",
+        "alwaysVisibleFilter": false,
+        "autoScroll": false,
+        "browserTabNamePattern": "",
+        "collapsedByDefault": false,
+        "customValue": false,
+        "displayMode": "button",
+        "emptyValue": true,
+        "favorites": {
+          "enabled": false,
+          "storage": "browser"
+        },
+        "filter": false,
+        "groupSelection": false,
+        "header": true,
+        "isMinimizeForTable": false,
+        "isMinimizeViewShowCustomIcon": false,
+        "isPinTabsEnabled": false,
+        "isUseLocalTime": false,
+        "minimizeOutputFormat": "text",
+        "minimizeViewCustomIcon": "",
+        "minimizeViewNativeIcon": "gf-movepane-right",
+        "padding": 10,
+        "persistent": false,
+        "requestLatency": "low",
+        "saveSelectedGroup": false,
+        "saveSelectedGroupKey": "",
+        "selectedValues": {
+          "showSelected": false
+        },
+        "showGroupTotal": false,
+        "showLabel": false,
+        "showName": false,
+        "showResetButton": true,
+        "showTotal": false,
+        "statusSort": false,
+        "sticky": false,
+        "tabsInOrder": true,
+        "variable": "predict_temp",
+        "wordBreak": "normal"
+      },
+      "pluginVersion": "4.1.0",
+      "title": "Temperature Selection",
+      "type": "volkovlabs-variable-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "If a probe is not shown, it means there is no valid future prediction ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 120
+              },
+              {
+                "color": "yellow",
+                "value": 600
+              },
+              {
+                "color": "green",
+                "value": 1800
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "((probe_prediction_time_to_temp_timestamp{target_temp=~\"$predict_temp\", probe_num=~\"$predict_probe\"}) - time()) > 0\n",
+          "instant": true,
+          "legendFormat": "Probe {{probe_num}} to {{target_temp}} F",
+          "range": false,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Prediction Time Estimate",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Probe not shown if no valid prediction available",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "dateTimeAsLocalNoDateIfToday"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "probe_prediction_time_to_temp_timestamp{target_temp=~\"$predict_temp\", probe_num=~\"$predict_probe\"}*1000 >0",
+          "instant": true,
+          "legendFormat": "Probe {{probe_num}} @ {{target_temp}} F",
+          "range": false,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Estimated Time to Temperature",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "thresholdsStyle": {
+              "mode": "color",
+              "thresholds": []
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 31
+      },
+      "id": 13,
+      "options": {
+        "alertCustomMessage": "",
+        "alwaysVisibleFilter": false,
+        "autoScroll": false,
+        "browserTabNamePattern": "",
+        "collapsedByDefault": false,
+        "customValue": false,
+        "displayMode": "button",
+        "emptyValue": false,
+        "favorites": {
+          "enabled": false,
+          "storage": "browser"
+        },
+        "filter": false,
+        "groupSelection": false,
+        "header": true,
+        "isMinimizeForTable": false,
+        "isMinimizeViewShowCustomIcon": false,
+        "isPinTabsEnabled": false,
+        "isUseLocalTime": false,
+        "minimizeOutputFormat": "text",
+        "minimizeViewCustomIcon": "",
+        "minimizeViewNativeIcon": "gf-movepane-right",
+        "padding": 10,
+        "persistent": false,
+        "requestLatency": "low",
+        "saveSelectedGroup": false,
+        "saveSelectedGroupKey": "",
+        "selectedValues": {
+          "showSelected": false
+        },
+        "showGroupTotal": false,
+        "showLabel": false,
+        "showName": false,
+        "showResetButton": false,
+        "showTotal": false,
+        "statusSort": false,
+        "sticky": false,
+        "tabsInOrder": true,
+        "variable": "predict_time",
+        "wordBreak": "normal"
+      },
+      "pluginVersion": "4.1.0",
+      "title": "Time Selection",
+      "type": "volkovlabs-variable-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "fahrenheit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 18,
+        "x": 6,
+        "y": 31
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "predict_linear(probe_temperature_fahrenheit{probe_num=~\"$predict_probe\"}[1m], $predict_time) >0",
+          "instant": true,
+          "legendFormat": "Probe {{probe_num}}",
+          "range": false,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Predicted Temperature in ${predict_time}",
+      "type": "stat"
     },
     {
       "collapsed": true,
@@ -1009,7 +1043,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 36
       },
       "id": 7,
       "panels": [
@@ -1044,7 +1078,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 34
+            "y": 47
           },
           "id": 6,
           "options": {
@@ -1120,7 +1154,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 34
+            "y": 47
           },
           "id": 8,
           "options": {
@@ -1236,19 +1270,19 @@
       },
       {
         "current": {
-          "text": "225",
-          "value": "225"
+          "text": "400",
+          "value": "400"
         },
         "label": "Target Air Temp",
         "name": "air_target",
         "options": [
           {
             "selected": true,
-            "text": "225",
-            "value": "225"
+            "text": "400",
+            "value": "400"
           }
         ],
-        "query": "225",
+        "query": "400",
         "type": "textbox"
       },
       {
@@ -1306,9 +1340,10 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "120",
-          "value": "120"
+          "text": "1200",
+          "value": "1200"
         },
+        "hide": 2,
         "name": "predict_time",
         "options": [
           {
@@ -1317,7 +1352,7 @@
             "value": "60"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "2m",
             "value": "120"
           },
@@ -1337,7 +1372,7 @@
             "value": "900"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "20m",
             "value": "1200"
           },
@@ -1370,7 +1405,6 @@
         "current": {},
         "definition": "label_values(probe_prediction_time_to_temp_timestamp,target_temp)",
         "hide": 2,
-        "multi": true,
         "name": "predict_temp",
         "options": [],
         "query": {
@@ -1385,13 +1419,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
-    "to": "now"
+    "from": "2025-08-04T20:26:07.395Z",
+    "to": "2025-08-04T20:33:25.159Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Weber Smokey Mountain Temperature Dashboard",
   "uid": "a7ee26a0-53d9-4a73-92c1-023cfab3224d",
-  "version": 56,
+  "version": 65,
   "weekStart": ""
 }
