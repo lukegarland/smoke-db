@@ -1,9 +1,13 @@
 import prometheus_client
+import prometheus_api_client
 
+from pprint import pprint
+import datetime
+import numpy as np
+import time
 
 def c_to_f(celsius_reading:float, round_to=2) -> float:
     return round(celsius_reading*9/5+32, round_to)
-
 
 class PrometheusExporter():
 
@@ -23,3 +27,77 @@ class PrometheusExporter():
         for probe in self.probe_temperature_celsius._labelvalues:
             self.probe_temperature_celsius.labels(probe_num=probe).set="NaN"
             self.probe_temperature_fahrenheit.labels(probe_num=probe).set="NaN"
+
+
+class TemperatureTimePredictor():
+
+    
+    def __init__(self, prometheus_exporter: PrometheusExporter):
+        self.exporter = prometheus_exporter
+        self.api = prometheus_api_client.prometheus_connect.PrometheusConnect(url="http://localhost:9090")
+        self.temperature_metric = "probe_temperature_fahrenheit"
+    
+        # normal meat teamperature ranges are 100 to 205 F
+        # normal smoking temperature ranges are 180 to 400 F
+        temperature_predictions = [i for i in range(100, 205+1, 5)] + [i for i in range(225, 400+1, 25)]
+
+    def get_temperature_data(self, start, end):
+        
+        data = self.api.custom_query_range(f"{self.temperature_metric}", start_time=start, end_time=end, step="15s")
+        
+        # {'probe_num': np.ndarray}
+        formatted_data = {}
+        for result in data:
+            probe_num = result['metric'].get('probe_num')
+            if probe_num:
+                formatted_data[probe_num] = np.array(result['values'], 'float64')
+        return formatted_data
+        
+
+    def predict_time_to_temperature(self, array:np.ndarray, target_temp:float=165):
+        x = array[:, 0]
+        y = array[:, 1]
+        
+        # degree 1 is linear
+        poly_fit_coeff = np.polyfit(x, y, deg=1)
+        m = poly_fit_coeff[0]
+        b = poly_fit_coeff[1]
+
+        # y = mx+b, so...
+        # x = (y-b)/m
+        predicted_timestamp = round((target_temp - b)/m, 1)
+        return predicted_timestamp
+    
+
+    def run_prediction(self, prediction_time:datetime.datetime, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=5)):
+        window_end = prediction_time
+        window_start = window_end - prediction_lookback_duration
+        temperature_data = self.get_temperature_data(window_start, window_end)
+        
+        results = {}
+
+        for probe, temperature_array in temperature_data.items():
+            predicted_timestamp = self.predict_time_to_temperature(temperature_array)
+            results[probe] = predicted_timestamp
+        return results
+    
+    def run_realtime_prediction(self, prediction_lookback_duration:datetime.timedelta=datetime.timedelta(minutes=5)):
+        
+        predictions = self.run_prediction(datetime.datetime.now(), prediction_lookback_duration)
+        for probe_num, prediction_timestamp in predictions.items():
+            pass
+            # report predictions to prometheus
+
+
+if __name__ == "__main__":
+    exporter = PrometheusExporter()
+    predictor = TemperatureTimePredictor(exporter)
+
+    end_date = datetime.datetime(2025, 8, 2, 18, 50, 00)
+    start_date = end_date - datetime.timedelta(minutes=5)
+    formatted_data = predictor.get_temperature_data(start_date, end_date)
+    
+    predictor.predict_time_to_temperature(formatted_data.get('1'))
+    predictor.predict_time_to_temperature(formatted_data.get('2'))
+    predictor.predict_time_to_temperature(formatted_data.get('3'))
+    predictor.predict_time_to_temperature(formatted_data.get('4'))
