@@ -3,6 +3,11 @@ Dashboard for ThermoPro based temperature sensing for meat smoking and grilling.
 
 Tested for ThermoPro TP-25 quad-probe meat thermometer. 
 
+Features:
+- Temperature tracking, with metrics for Fahrenheit and Celsius 
+- Simple 2-minute linear regression model for prediction on when each probe will reach a particular temperature. If a probe has already reached a temperature, or the temperature will never be reached in the future, the metric will report 0. 
+- Docker compose for running Prometheus and Grafana locally
+- Importable Grafana dashboard
 
 ## Screenshots
 
