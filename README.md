@@ -23,5 +23,5 @@ Tested for ThermoPro TP-25 quad-probe meat thermometer.
 - `docker/docker-compose.yml` creates the following containers:
     - `prom/prometheus:v3.5.0`
         - Time Series Database (TSDB) for long term collection and storage of temperature data
-    - `grafana/grafana:12.0.3`
+    - `grafana/grafana:12.1.0`
         - Web Server and Dashboard Software for visualization, and alerting 
