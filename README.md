@@ -5,9 +5,15 @@ Tested for ThermoPro TP-25 quad-probe meat thermometer.
 
 
 ## Screenshots
-![Main Status Panels](.github/images/img1_status.png)
 
-![Prediction Panels](.github/images/img2_predictions.png)
+<img src=".github/images/smoker.png" width="425"/>  <img src=".github/images/mobile_screenshot.jpg" width="425"/> 
+
+<br>
+<img src=".github/images/status.png" width="800"/>
+
+<br>
+<img src=".github/images/predictions.png" width="800"/> 
+
 
 ## Project Structure
 - `python/`: contains code and scripts for connecting to ThermoPro TP-25 and scraping the temperature sensee by the device probes.
