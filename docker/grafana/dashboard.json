@@ -1,59 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "12.1.0"
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "volkovlabs-variable-panel",
-      "name": "Business Variable",
-      "version": "4.1.0"
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -73,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -92,7 +37,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "fieldConfig": {
         "defaults": {
@@ -121,7 +66,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 0,
         "y": 1
@@ -156,16 +101,12 @@
           "legendFormat": "Probe {{probe_num}}",
           "range": false,
           "refId": "A",
-          "useBackend": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "useBackend": false
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "fetgnl68we800f"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -206,7 +147,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "fieldConfig": {
         "defaults": {
@@ -243,7 +184,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 12,
         "y": 1
@@ -277,11 +218,7 @@
           "legendFormat": "Probe {{probe_num}}",
           "range": false,
           "refId": "A",
-          "useBackend": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "useBackend": false
         }
       ],
       "title": "Air Temperature",
@@ -290,7 +227,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "fieldConfig": {
         "defaults": {
@@ -350,7 +287,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 7
       },
       "id": 1,
       "options": {
@@ -371,7 +308,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "fetgnl68we800f"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -387,7 +324,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "fetgnl68we800f"
           },
           "editorMode": "code",
           "expr": "$meat_target",
@@ -427,7 +364,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "fieldConfig": {
         "defaults": {
@@ -441,7 +378,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 400,
-            "axisSoftMin": 0,
+            "axisSoftMin": 150,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -487,7 +424,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 7
       },
       "id": 9,
       "options": {
@@ -508,7 +445,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "fetgnl68we800f"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -523,7 +460,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "fetgnl68we800f"
           },
           "editorMode": "code",
           "expr": "$air_target",
@@ -567,7 +504,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 17
       },
       "id": 19,
       "panels": [],
@@ -577,7 +514,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "description": "Meat Probes only",
       "fieldConfig": {
@@ -608,7 +545,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 20
+        "y": 18
       },
       "id": 12,
       "options": {
@@ -654,13 +591,18 @@
         "wordBreak": "normal"
       },
       "pluginVersion": "4.1.0",
+      "targets": [
+        {
+          "refId": "A"
+        }
+      ],
       "title": "Probe Selection",
       "type": "volkovlabs-variable-panel"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "fieldConfig": {
         "defaults": {
@@ -690,7 +632,7 @@
         "h": 4,
         "w": 20,
         "x": 4,
-        "y": 20
+        "y": 18
       },
       "id": 18,
       "options": {
@@ -736,13 +678,18 @@
         "wordBreak": "normal"
       },
       "pluginVersion": "4.1.0",
+      "targets": [
+        {
+          "refId": "A"
+        }
+      ],
       "title": "Temperature Selection",
       "type": "volkovlabs-variable-panel"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "description": "If a probe is not shown, it means there is no valid future prediction ",
       "fieldConfig": {
@@ -780,7 +727,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 24
+        "y": 22
       },
       "id": 20,
       "options": {
@@ -809,11 +756,7 @@
           "instant": true,
           "legendFormat": "Probe {{probe_num}} to {{target_temp}} F",
           "range": false,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Prediction Time Estimate",
@@ -822,7 +765,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "description": "Probe not shown if no valid prediction available",
       "fieldConfig": {
@@ -848,7 +791,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 22
       },
       "id": 17,
       "options": {
@@ -877,11 +820,7 @@
           "instant": true,
           "legendFormat": "Probe {{probe_num}} @ {{target_temp}} F",
           "range": false,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Estimated Time to Temperature",
@@ -890,7 +829,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "fieldConfig": {
         "defaults": {
@@ -920,7 +859,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 31
+        "y": 29
       },
       "id": 13,
       "options": {
@@ -966,13 +905,18 @@
         "wordBreak": "normal"
       },
       "pluginVersion": "4.1.0",
+      "targets": [
+        {
+          "refId": "A"
+        }
+      ],
       "title": "Time Selection",
       "type": "volkovlabs-variable-panel"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "fetgnl68we800f"
       },
       "fieldConfig": {
         "defaults": {
@@ -998,7 +942,7 @@
         "h": 5,
         "w": 18,
         "x": 6,
-        "y": 31
+        "y": 29
       },
       "id": 14,
       "options": {
@@ -1027,225 +971,213 @@
           "instant": true,
           "legendFormat": "Probe {{probe_num}}",
           "range": false,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Predicted Temperature in ${predict_time}",
       "type": "stat"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 34
       },
       "id": 7,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+      "panels": [],
+      "title": "Probe Info",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetgnl68we800f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
               },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "#EAB839",
-                    "value": 0
-                  }
-                ]
+              {
+                "color": "#EAB839",
+                "value": 0
               }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 47
-          },
-          "id": 6,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.1.0",
-          "targets": [
-            {
-              "editorMode": "code",
-              "expr": "probe_temperature_fahrenheit",
-              "legendFormat": "Probe {{probe_num}}",
-              "range": true,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              }
-            }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 35
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
           ],
-          "title": "Probe Readings",
-          "type": "stat"
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "probe_temperature_fahrenheit",
+          "legendFormat": "Probe {{probe_num}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Probe Readings",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetgnl68we800f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false,
+            "minWidth": 50
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 35
+      },
+      "id": 8,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "probe_temperature_fahrenheit{probe_num=~\"$air_probe\"}",
+          "legendFormat": "Air Probe {{probe_num}}",
+          "range": true,
+          "refId": "A"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "fetgnl68we800f"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "inspect": false,
-                "minWidth": 50
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "#EAB839",
-                    "value": 0
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 47
-          },
-          "id": 8,
-          "options": {
-            "cellHeight": "sm",
-            "footer": {
-              "countRows": false,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
-            },
-            "showHeader": true
-          },
-          "pluginVersion": "12.1.0",
-          "targets": [
-            {
-              "editorMode": "code",
-              "expr": "probe_temperature_fahrenheit{probe_num=~\"$air_probe\"}",
-              "legendFormat": "Air Probe {{probe_num}}",
-              "range": true,
-              "refId": "A",
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              }
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "probe_temperature_fahrenheit{probe_num=~\"$meat_probe\"}",
-              "hide": false,
-              "instant": false,
-              "legendFormat": "Meat Probe {{probe_num}}",
-              "range": true,
-              "refId": "B"
-            }
-          ],
-          "title": "Probe Readings",
-          "transformations": [
-            {
-              "id": "reduce",
-              "options": {
-                "labelsToFields": false,
-                "reducers": [
-                  "min",
-                  "max",
-                  "mean",
-                  "lastNotNull"
-                ]
-              }
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {},
-                "includeByName": {},
-                "indexByName": {
-                  "Field": 0,
-                  "Last *": 1,
-                  "Max": 3,
-                  "Mean": 4,
-                  "Min": 2
-                },
-                "renameByName": {
-                  "Last *": "Last"
-                }
-              }
-            },
-            {
-              "id": "sortBy",
-              "options": {
-                "fields": {},
-                "sort": [
-                  {
-                    "field": "Field"
-                  }
-                ]
-              }
-            }
-          ],
-          "type": "table"
+          "editorMode": "code",
+          "expr": "probe_temperature_fahrenheit{probe_num=~\"$meat_probe\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Meat Probe {{probe_num}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Probe Info",
-      "type": "row"
+      "title": "Probe Readings",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "labelsToFields": false,
+            "reducers": [
+              "min",
+              "max",
+              "mean",
+              "lastNotNull"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Field": 0,
+              "Last *": 1,
+              "Max": 3,
+              "Mean": 4,
+              "Min": 2
+            },
+            "renameByName": {
+              "Last *": "Last"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Field"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "5s",
   "schemaVersion": 41,
   "tags": [],
@@ -1253,7 +1185,16 @@
     "list": [
       {
         "allowCustomValue": false,
-        "current": {},
+        "current": {
+          "text": [
+            "3",
+            "4"
+          ],
+          "value": [
+            "3",
+            "4"
+          ]
+        },
         "definition": "label_values(probe_temperature_fahrenheit{probe_num!~\"$meat_probe\"},probe_num)",
         "label": "Air Probe",
         "multi": true,
@@ -1270,24 +1211,33 @@
       },
       {
         "current": {
-          "text": "400",
-          "value": "400"
+          "text": "225",
+          "value": "225"
         },
         "label": "Target Air Temp",
         "name": "air_target",
         "options": [
           {
             "selected": true,
-            "text": "400",
-            "value": "400"
+            "text": "225",
+            "value": "225"
           }
         ],
-        "query": "400",
+        "query": "225",
         "type": "textbox"
       },
       {
         "allowCustomValue": false,
-        "current": {},
+        "current": {
+          "text": [
+            "1",
+            "2"
+          ],
+          "value": [
+            "1",
+            "2"
+          ]
+        },
         "definition": "label_values(probe_temperature_fahrenheit,probe_num)",
         "label": "Meat Probe",
         "multi": true,
@@ -1304,24 +1254,33 @@
       },
       {
         "current": {
-          "text": "165",
-          "value": "165"
+          "text": "150",
+          "value": "150"
         },
         "label": "Target Meat Temp",
         "name": "meat_target",
         "options": [
           {
             "selected": true,
-            "text": "165",
-            "value": "165"
+            "text": "150",
+            "value": "150"
           }
         ],
-        "query": "165",
+        "query": "150",
         "type": "textbox"
       },
       {
         "allowCustomValue": false,
-        "current": {},
+        "current": {
+          "text": [
+            "1",
+            "2"
+          ],
+          "value": [
+            "1",
+            "2"
+          ]
+        },
         "definition": "label_values(probe_temperature_celsius,probe_num)",
         "hide": 2,
         "includeAll": true,
@@ -1402,7 +1361,10 @@
       },
       {
         "allowCustomValue": false,
-        "current": {},
+        "current": {
+          "text": "145",
+          "value": "145"
+        },
         "definition": "label_values(probe_prediction_time_to_temp_timestamp,target_temp)",
         "hide": 2,
         "name": "predict_temp",
@@ -1419,13 +1381,12 @@
     ]
   },
   "time": {
-    "from": "2025-08-04T20:26:07.395Z",
-    "to": "2025-08-04T20:33:25.159Z"
+    "from": "2025-08-04T22:37:02.080Z",
+    "to": "2025-08-04T22:59:03.677Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Weber Smokey Mountain Temperature Dashboard",
   "uid": "a7ee26a0-53d9-4a73-92c1-023cfab3224d",
-  "version": 65,
-  "weekStart": ""
+  "version": 74
 }
