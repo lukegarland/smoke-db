@@ -6,7 +6,7 @@ Tested for ThermoPro TP-25 quad-probe meat thermometer.
 
 ## Screenshots
 
-<img src=".github/images/smoker.png" width="425"/>  <img src=".github/images/mobile_screenshot.jpg" width="425"/> 
+<img src=".github/images/smoker.jpg" width="425"/>  <img src=".github/images/mobile_screenshot.jpg" width="425"/> 
 
 <br>
 <img src=".github/images/status.png" width="800"/>
