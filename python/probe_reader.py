@@ -61,28 +61,34 @@ async def connect_device(device: bleak.backends.device.BLEDevice) -> bleak.Bleak
     
     return client
 
+async def wait_for_connection():
+    while True:
+        device = await find_device(timeout=5)
+        if device:
+            client = await connect_device(device)
+            return device, client
+            
+
 async def main():
     predictor = prometheus.TemperatureTimePredictor(prometheus_exporter)
-    device = await find_device(timeout=5)
-    if device:
-        client = await connect_device(device) 
-        
-        while True:
-            try:
-                await asyncio.sleep(5)
-                predictor.run_realtime_prediction()
-                if not client.is_connected:
-                    device = await find_device(timeout=15)
-                    if device:
-                        client = await connect_device(device)
-                    if client.is_connected:
-                        print("successfully reconnected to device")
-                    else:
-                        print("Error, unable to connect to device")
-                        prometheus_exporter.probe_disconnected()
-            except bleak.exc.BleakError as e:
-                print(e.with_traceback())
-                continue
+    device , client = wait_for_connection()
+                
+    while True:
+        try:
+            await asyncio.sleep(5)
+            predictor.run_realtime_prediction()
+            if not client.is_connected:
+                device = await find_device(timeout=15)
+                if device:
+                    client = await connect_device(device)
+                if client.is_connected:
+                    print("successfully reconnected to device")
+                else:
+                    print("Error, unable to connect to device")
+                    prometheus_exporter.probe_disconnected()
+        except bleak.exc.BleakError as e:
+            print(e.with_traceback())
+            continue
                 
 if __name__ == "__main__":
     asyncio.run(main())
