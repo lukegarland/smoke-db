@@ -1,5 +1,6 @@
 services:
   prometheus:
+    container_name: prometheus-smoke-db
     image: prom/prometheus:v3.5.0
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -17,6 +18,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
   grafana: 
+    container_name: grafana-smoke-db
     image: grafana/grafana:12.2.0
     ports: 
       - "3000:3000"
