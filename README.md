@@ -36,3 +36,25 @@ Features:
         - Time Series Database (TSDB) for long term collection and storage of temperature data
     - `grafana/grafana:12.1.0`
         - Web Server and Dashboard Software for visualization, and alerting 
+
+
+## Instructions for setting up persistence
+
+To set up Docker Containers to "restart always":
+```bash 
+cd docker 
+docker compose up -d
+docker update --restart=always prometheus-smoke-db
+docker update --restart=always grafana-smoke-db
+```
+
+To ensure Probe Reader runs as service:
+1. Ensure `python/TP25Reader.service` is configured appropriately (`ExecStart`, `User`, `Group` are all set correctly for the envrionment)
+2. Run the following:
+
+    ```bash 
+    sudo cp python/TP25Reader.service /etc/systemd/system/
+    sudo systemctl daemon-reload
+    sudo systemctl enable TP25Reader
+    sudo systemctl start TP25Reader
+    ```
