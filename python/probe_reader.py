@@ -71,7 +71,7 @@ async def wait_for_connection():
 
 async def main():
     predictor = prometheus.TemperatureTimePredictor(prometheus_exporter)
-    device , client = wait_for_connection()
+    device, client = await wait_for_connection()
                 
     while True:
         try:
