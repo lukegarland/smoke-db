@@ -44,8 +44,6 @@ To set up Docker Containers to "restart always":
 ```bash 
 cd docker 
 docker compose up -d
-docker update --restart=always prometheus-smoke-db
-docker update --restart=always grafana-smoke-db
 ```
 
 To ensure Probe Reader runs as service:

@@ -1,15 +1,14 @@
 services:
   prometheus:
+    restart: always
     container_name: prometheus-smoke-db
     image: prom/prometheus:v3.5.0
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.size=500MB'
-    
     ports:
       - "9090:9090"
-      
     volumes:
       - ./prometheus:/etc/prometheus/
       - prom_data:/prometheus
@@ -17,7 +16,9 @@ services:
       - docker_network
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
   grafana: 
+    restart: always
     container_name: grafana-smoke-db
     image: grafana/grafana:12.2.0
     ports: 
