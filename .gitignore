@@ -191,5 +191,5 @@ pyrightconfig.json
 # Ignore all local history of files
 .history
 .ionide
-
+docker/grafana.db
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
